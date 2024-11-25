@@ -6,7 +6,7 @@
 /*   By: vodebunm <vodebunm@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 15:14:12 by vodebunm          #+#    #+#             */
-/*   Updated: 2024/11/25 15:28:16 by vodebunm         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:33:50 by vodebunm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,21 @@ private:
 
 public:
     Fixed(); // Default constructor
+    Fixed(const int integer); // Constructor for int
+    Fixed(const float floating); // Constructor for float
     Fixed(const Fixed& copy); // Copy constructor
     Fixed& operator=(const Fixed& copy); // Copy assignment operator
     ~Fixed(); // Destructor
-	Fixed(const int integer);//constructor for int
-	Fixed(const float floating);//constructor for int
 
-    int getRawBits(void) const; //getter for retrieving raw value
-    void setRawBits(int const raw);
-	
-	int toInt( void ) const; //function to convert  fixed-point num tofloat
-	float toFloat( void ) const;//function to convert float
+    int getRawBits(void) const; // Getter for retrieving raw value
+    void setRawBits(int const raw); // Setter for raw value
+
+    int toInt(void) const; // Function to convert fixed-point num to int
+    float toFloat(void) const; // Function to convert fixed-point num to float
 };
-std::ostream& operator <<(std::ostream& overload, const Fixed& fixed);
+
+// Overload operator
+std::ostream& operator<<(std::ostream& out, const Fixed& val);
 
 #endif
 

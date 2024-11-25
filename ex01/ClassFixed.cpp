@@ -6,7 +6,7 @@
 /*   By: vodebunm <vodebunm@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 15:14:16 by vodebunm          #+#    #+#             */
-/*   Updated: 2024/11/25 16:09:15 by vodebunm         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:35:13 by vodebunm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,25 @@ Fixed::Fixed() : value(0)
     std::cout << "Default Constructor called" << std::endl;
 }
 
-//Constructor for integer
-Fixed::Fixed(const int integer)
+// Constructor for integer
+Fixed::Fixed(const int integer) 
 {
-	std::cout << "Integer Cconstructor called\n";
-	value = integer <<fraction_part; //Scaling of int  to fixed-point
+    std::cout << "Integer Constructor called" << std::endl;
+    value = integer << fraction_part;  // Scaling of int to fixed-point
 }
 
-//Float Constructor
-Fixed::Fixed(const float floating)
+// Float Constructor
+Fixed::Fixed(const float floating) 
 {
-	std::cout << "Float constructor called\n";
-	value = roundf(floating * (1 << fraction_part));
+    std::cout << "Float Constructor called" << std::endl;
+    value = roundf(floating * (1 << fraction_part));  // Scaling of float to fixed-point
 }
 
 // Copy Constructor
-Fixed::Fixed(const Fixed& copy)
+Fixed::Fixed(const Fixed& copy) 
 {
     std::cout << "Copy Constructor called" << std::endl;
-	*this=copy;
+    *this = copy;  //  to copy assignment operator
 }
 
 // Copy Assignment Operator
@@ -44,47 +44,45 @@ Fixed& Fixed::operator=(const Fixed& copy)
 {
     std::cout << "Copy Assignment Operator called" << std::endl;
 
-    if (this != &copy) 
-	{ 
-        this->value = copy.getRawBits(); //Check andCopy the value
+    if (this != &copy) {
+        this->value = copy.getRawBits();  // Copy the raw value
     }
-    return *this; //allow for chained assignments
+    return *this;  // Allow for chained assignments
 }
 
-//Destructor
-Fixed::~Fixed()
+// Destructor
+Fixed::~Fixed() 
 {
-	std::cout << "Destructor called\n";
+    std::cout << "Destructor called" << std::endl;
 }
 
-int Fixed::getRawBits() const
+int Fixed::getRawBits() const 
 {
-	std::cout <<"get the raw value of the fixed-point"<<std::endl;
-	return(value);
-	
+    std::cout << "getRawBits called" << std::endl;
+    return value;
 }
 
-void Fixed::setRawBits(int const raw)
+void Fixed::setRawBits(int const raw) 
 {
-	std::cout <<"set the raw value of the fixed-point value\n";
-	value = raw;
+    std::cout << "setRawBits called" << std::endl;
+    value = raw;
 }
 
-//Fixed-point number to int
-int Fixed::toInt() const
+// Convert Fixed-point number to int
+int Fixed::toInt() const 
 {
-	return(value >> fraction_part);//scaling down to integer
+    return value >> fraction_part;  // Scaling down to integer
 }
 
-//Fixed-point number to float
-float Fixed::toFloat() const
+// Convert Fixed-point number to float
+float Fixed::toFloat() const 
 {
-	return static_cast<float>(value)/ (1 <<fraction_part);
+    return static_cast<float>(value) / (1 << fraction_part);  // Scaling down to float
 }
 
-//Ovrelan the operator to print fixed-point to floating point num
-std::ostream& operator << (std::ostream& overload, const Fixed& val)
+// Overloaded operator to print fixed-point number as floating point
+std::ostream& operator<<(std::ostream& out, const Fixed& val) 
 {
-	overload << val.toFloat();
-	return(overload);
+    out << val.toFloat();
+    return out;
 }
