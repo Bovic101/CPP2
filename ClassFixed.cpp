@@ -6,7 +6,7 @@
 /*   By: vodebunm <vodebunm@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:42:15 by vodebunm          #+#    #+#             */
-/*   Updated: 2024/11/25 14:08:25 by vodebunm         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:17:56 by vodebunm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ Fixed::~Fixed()
 
 int Fixed::getRawBits() const
 {
-	std::cout <<"get the rew value of the fixed-point"<<std::endl;
+	std::cout <<"get the raw value of the fixed-point"<<std::endl;
+	return(value);
+	
 }
 
 void Fixed::setRawBits(int const raw)

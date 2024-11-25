@@ -6,7 +6,7 @@
 /*   By: vodebunm <vodebunm@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:38:54 by vodebunm          #+#    #+#             */
-/*   Updated: 2024/11/25 14:13:10 by vodebunm         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:21:50 by vodebunm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int main()
 	Fixed b(a); //copy const
 	Fixed c;
 
-	c = b; //copy assignment op
+	c = b; //copy assignment op#
+	//a.setRawBits(42);
 	
 	std::cout << a.getRawBits() << std::endl;
 	std::cout << b.getRawBits() << std::endl;
