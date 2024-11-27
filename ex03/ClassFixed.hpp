@@ -6,7 +6,7 @@
 /*   By: vodebunm <vodebunm@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 08:46:29 by vodebunm          #+#    #+#             */
-/*   Updated: 2024/11/27 09:49:13 by vodebunm         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:07:06 by vodebunm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 
 class Fixed {
 private:
@@ -29,38 +30,41 @@ public:
     Fixed& operator=(const Fixed& copy); // Copy assignment operator
     ~Fixed(); // Destructor
 
-	//Arithematic Op
-	Fixed operator +(const Fixed& cp) const;
-	Fixed operator *(const Fixed& cp) const;
-	Fixed operator -(const Fixed& cp) const;
-	Fixed operator /(const Fixed& cp) const;
-	
-	//Unary Op
-	Fixed operator ++();//pre_increment
-	Fixed operator --();
-	Fixed operator ++(int);//post increment
-	Fixed operator --(int);
+    // Arithmetic operators
+    Fixed operator +(const Fixed& cp) const;
+    Fixed operator *(const Fixed& cp) const;
+    Fixed operator -(const Fixed& cp) const;
+    Fixed operator /(const Fixed& cp) const;
 
-	//Relational Op
-	bool operator >(const Fixed& cp) const;
-	bool operator <(const Fixed& cp) const;
-	bool operator ==(const Fixed& cp) const;
-	bool operator >=(const Fixed& cp) const;
-	bool operator !=(const Fixed& cp) const;
-	bool operator <=(const Fixed& cp) const;
+    // Unary operators
+    Fixed& operator ++();
+    Fixed& operator --();  // Pre-decrement
+    Fixed operator ++(int); // Post-increment
+    Fixed operator --(int); 
 
-    int getRawBits(void) const; // Getter for retrieving raw value
-    void setRawBits(int const raw); // Setter for raw value
-    int toInt(void) const; // Function to convert fixed-point num to int
-    float toFloat(void) const; // Function to convert fixed-point num to float
-	
-	//Static Function
-	static Fixed& min(Fixed& num1, Fixed& num2);
-	static Fixed& max(Fixed& num1, Fixed& num2);
-	static const Fixed& min(const Fixed& num1, const Fixed& num2);
-	static const Fixed& max(const Fixed& num1, const Fixed& num2);
-	//function for output
-	friend std::ostream& operator<<(std::ostream& cout, const Fixed& val);
+    // Relational operators
+    bool operator >(const Fixed& cp) const;
+    bool operator <(const Fixed& cp) const;
+    bool operator ==(const Fixed& cp) const;
+    bool operator >=(const Fixed& cp) const;
+    bool operator !=(const Fixed& cp) const;
+    bool operator <=(const Fixed& cp) const;
+
+    int getRawBits(void) const;
+    void setRawBits(int const raw); 
+    int toInt(void) const; // Convert fixed-point to int
+    float toFloat(void) const; // Convert fixed-point to float
+
+    // Static functions
+    static Fixed& min(Fixed& num1, Fixed& num2);
+    static Fixed& max(Fixed& num1, Fixed& num2);
+    static const Fixed& min(const Fixed& num1, const Fixed& num2);
+    static const Fixed& max(const Fixed& num1, const Fixed& num2);
+
+    // Function for output
+    friend std::ostream& operator<<(std::ostream& out, const Fixed& val);
 };
 
 #endif
+
+

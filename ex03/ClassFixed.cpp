@@ -6,11 +6,12 @@
 /*   By: vodebunm <vodebunm@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 08:47:18 by vodebunm          #+#    #+#             */
-/*   Updated: 2024/11/27 10:47:32 by vodebunm         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:08:10 by vodebunm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClassFixed.hpp"
+#include <stdexcept> // for runtime_error
 
 // Default Constructor
 Fixed::Fixed() : value(0) 
@@ -36,7 +37,7 @@ Fixed::Fixed(const float floating)
 Fixed::Fixed(const Fixed& copy) 
 {
     std::cout << "Copy Constructor called" << std::endl;
-    *this = copy;  // to copy assignment operator
+    *this = copy;  // To call copy assignment operator
 }
 
 // Copy Assignment Operator
@@ -45,7 +46,7 @@ Fixed& Fixed::operator=(const Fixed& copy)
     std::cout << "Copy Assignment Operator called" << std::endl;
 
     if (this != &copy) 
-	{
+    {
         this->value = copy.value;  // Copy the raw value
     }
     return *this;  // Allow for chained assignments
@@ -84,11 +85,11 @@ float Fixed::toFloat() const
 // Overloaded operator to print fixed-point number as floating point
 std::ostream& operator<<(std::ostream& out, const Fixed& val) 
 {
-    out << val.toFloat();
+    out << std::fixed << std::setprecision(2) << val.toFloat();  // Example: 2 decimal places
     return out;
 }
 
-// Relational ops
+// Relational operators
 bool Fixed::operator<=(const Fixed& cp) const
 {
     return (this->value <= cp.value);
@@ -119,7 +120,7 @@ bool Fixed::operator==(const Fixed& cp) const
     return (this->value == cp.value);
 }
 
-// Arithmetic ops
+// Arithmetic operators
 Fixed Fixed::operator+(const Fixed& cp) const
 {
     Fixed result;
@@ -137,7 +138,7 @@ Fixed Fixed::operator-(const Fixed& cp) const
 Fixed Fixed::operator*(const Fixed& cp) const
 {
     Fixed result;
-    result.value = (this->value * cp.value) >> fraction_part; // scale during multiplication
+    result.value = (this->value * cp.value) >> fraction_part; // Scale during multiplication
     return result;
 }
 
@@ -147,39 +148,38 @@ Fixed Fixed::operator/(const Fixed& cp) const
         throw std::runtime_error("Division by zero");
     }
     Fixed result;
-    result.value = (this->value << fraction_part) / cp.value; // Correctly scale during division
+    result.value = (this->value << fraction_part) / cp.value; // scale during division
     return result;
 }
 
-// Unary Operators
-Fixed& Fixed::operator++() // Pre-increment
+// Unary operators
+Fixed& Fixed::operator++()
 {
     ++value;
     return *this;
 }
 
-Fixed Fixed::operator++(int) // Post-increment
+Fixed Fixed::operator++(int)
 {
     Fixed tmp = *this;
     value++;
     return tmp; 
 }
 
-Fixed& Fixed::operator--() // Pre-decrement
+Fixed& Fixed::operator--()
 {
     --value;
     return *this;
 }
 
-Fixed Fixed::operator--(int) // Post-decrement
+Fixed Fixed::operator--(int)
 {
     Fixed tmp = *this;
     value--;
     return tmp;
 }
 
-//Min and Min Function
-
+// Static min/max functions
 Fixed& Fixed::min(Fixed& num1, Fixed& num2) 
 { 
     return (num1 < num2) ? num1 : num2; 
@@ -200,8 +200,5 @@ const Fixed& Fixed::max(const Fixed& num1, const Fixed& num2)
     return (num1 > num2) ? num1 : num2; 
 }
 
-std::ostream& operator<<(std::ostream& cout, const Fixed& val) 
-{
-    cout << val.toFloat();
-    return cout;
-}
+
+
